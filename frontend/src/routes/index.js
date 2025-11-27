@@ -3,6 +3,8 @@ import App from '../App'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
 import ForgotPassowrd from '../pages/ForgotPassowrd'
+import VerifyResetCode from '../pages/VerifyResetCode'
+import ResetPassword from '../pages/ResetPassword'
 import SignUp from '../pages/SignUp'
 import AdminPanel from '../pages/AdminPanel'
 import AllUsers from '../pages/AllUsers'
@@ -29,6 +31,14 @@ const router = createBrowserRouter([
             {
                 path : "forgot-password",
                 element : <ForgotPassowrd/>
+            },
+            {
+                path : "verify-reset-code",
+                element : <VerifyResetCode/>
+            },
+            {
+                path : "reset-password",
+                element : <ResetPassword/>
             },
             {
                 path : "sign-up",

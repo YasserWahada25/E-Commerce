@@ -25,6 +25,9 @@ const filterProductController = require('../controller/product/filterProduct')
 const adminProfileController = require('../controller/user/adminProfile')
 const userProfileController = require('../controller/user/userProfile')
 const getCategoriesWithCount = require('../controller/product/getCategoriesWithCount')
+const forgotPasswordController = require('../controller/user/forgotPassword')
+const verifyResetCodeController = require('../controller/user/verifyResetCode')
+const resetPasswordController = require('../controller/user/resetPassword')
 
 const upload = require('../middleware/multer')
 
@@ -32,6 +35,11 @@ router.post("/signup",userSignUpController)
 router.post("/signin",userSignInController)
 router.get("/user-details",authToken,userDetailsController)
 router.get("/userLogout",userLogout)
+
+//password reset
+router.post("/forgot-password",forgotPasswordController)
+router.post("/verify-reset-code",verifyResetCodeController)
+router.post("/reset-password",resetPasswordController)
 
 //admin panel 
 router.get("/all-user",authToken,allUsers)
