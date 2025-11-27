@@ -248,6 +248,7 @@ const ProductDetails = () => {
                     <button
                       onClick={decrementQuantity}
                       className='px-4 py-2 bg-gray-100 hover:bg-gray-200 transition-colors'
+                      disabled={data?.stock === 0}
                     >
                       <FaMinus className='text-gray-600' />
                     </button>
@@ -255,13 +256,18 @@ const ProductDetails = () => {
                     <button
                       onClick={incrementQuantity}
                       className='px-4 py-2 bg-gray-100 hover:bg-gray-200 transition-colors'
+                      disabled={data?.stock === 0}
                     >
                       <FaPlus className='text-gray-600' />
                     </button>
                   </div>
-                  {data?.stock > 0 && (
+                  {data?.stock > 0 ? (
                     <span className='text-sm text-gray-600'>
                       {data.stock} items in stock
+                    </span>
+                  ) : (
+                    <span className='text-sm text-red-600 font-semibold'>
+                      Out of Stock
                     </span>
                   )}
                 </div>
@@ -269,18 +275,29 @@ const ProductDetails = () => {
 
               {/* Action Buttons */}
               <div className='flex gap-4 pt-4'>
-                <button
-                  onClick={(e) => handleBuyProduct(e, data?._id)}
-                  className='flex-1 btn-primary py-4 text-lg'
-                >
-                  Buy Now
-                </button>
-                <button
-                  onClick={(e) => handleAddToCart(e, data?._id)}
-                  className='flex-1 btn-secondary py-4 text-lg'
-                >
-                  Add to Cart
-                </button>
+                {data?.stock > 0 ? (
+                  <>
+                    <button
+                      onClick={(e) => handleBuyProduct(e, data?._id)}
+                      className='flex-1 btn-primary py-4 text-lg'
+                    >
+                      Buy Now
+                    </button>
+                    <button
+                      onClick={(e) => handleAddToCart(e, data?._id)}
+                      className='flex-1 btn-secondary py-4 text-lg'
+                    >
+                      Add to Cart
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    disabled
+                    className='flex-1 py-4 text-lg bg-gray-400 text-white rounded-lg cursor-not-allowed opacity-60 font-semibold'
+                  >
+                    SOLD OUT
+                  </button>
+                )}
               </div>
 
               {/* Delivery Info */}

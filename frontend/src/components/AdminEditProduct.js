@@ -22,7 +22,8 @@ const AdminEditProduct = ({
     productImage : productData?.productImage || [],
     description : productData?.description,
     price : productData?.price,
-    sellingPrice : productData?.sellingPrice
+    sellingPrice : productData?.sellingPrice,
+    stock : productData?.stock || 0
   })
   const [openFullScreenImage,setOpenFullScreenImage] = useState(false)
   const [fullScreenImage,setFullScreenImage] = useState("")
@@ -242,6 +243,21 @@ const AdminEditProduct = ({
                   required
                 />
               </div>
+            </div>
+
+            <div>
+              <label htmlFor='stock' className='block text-sm font-semibold text-gray-700 mb-2'>Quantity (Stock)</label>
+              <input 
+                type='number' 
+                id='stock' 
+                placeholder='Enter quantity in stock' 
+                value={data.stock} 
+                name='stock'
+                onChange={handleOnChange}
+                className='input-modern w-full'
+                min='0'
+                required
+              />
             </div>
 
             <div>

@@ -46,21 +46,52 @@ const ChangeUserRole = ({
     }
 
   return (
-    <div className='fixed top-0 bottom-0 left-0 right-0 w-full h-full z-10 flex justify-between items-center bg-slate-200 bg-opacity-50'>
-       <div className='mx-auto bg-white shadow-md p-4 w-full max-w-sm'>
+    <div className='fixed w-full h-full bg-slate-900 bg-opacity-50 top-0 left-0 right-0 bottom-0 flex justify-center items-center z-50 p-4'>
+       <div className='bg-white rounded-2xl w-full max-w-md shadow-xl'>
+            
+            {/* Header */}
+            <div className='flex justify-between items-center p-6 border-b border-gray-200'>
+                <div>
+                  <h2 className='font-bold text-2xl text-gray-900'>Change User Role</h2>
+                  <p className='text-sm text-gray-500 mt-1'>Update user permissions</p>
+                </div>
+                <button 
+                  className='w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-500 hover:text-red-600 transition-all' 
+                  onClick={onClose}
+                >
+                    <IoMdClose className='text-2xl'/>
+                </button>
+            </div>
 
-            <button className='block ml-auto' onClick={onClose}>
-                <IoMdClose/>
-            </button>
+            {/* Content */}
+            <div className='p-6 space-y-4'>
+              <div>
+                <label className='block text-sm font-semibold text-gray-700 mb-2'>Name</label>
+                <input 
+                  type='text' 
+                  value={name} 
+                  readOnly 
+                  className='input-modern w-full bg-gray-50 cursor-not-allowed'
+                />
+              </div>
 
-            <h1 className='pb-4 text-lg font-medium'>Change User Role</h1>
+              <div>
+                <label className='block text-sm font-semibold text-gray-700 mb-2'>Email</label>
+                <input 
+                  type='email' 
+                  value={email} 
+                  readOnly 
+                  className='input-modern w-full bg-gray-50 cursor-not-allowed'
+                />
+              </div>
 
-             <p>Name : {name}</p>   
-             <p>Email : {email}</p> 
-
-            <div className='flex items-center justify-between my-4'>
-                <p>Role :</p>  
-                <select className='border px-4 py-1' value={userRole} onChange={handleOnChangeSelect}>
+              <div>
+                <label className='block text-sm font-semibold text-gray-700 mb-2'>Role</label>
+                <select 
+                  className='input-modern w-full' 
+                  value={userRole} 
+                  onChange={handleOnChangeSelect}
+                >
                     {
                         Object.values(ROLE).map(el => {
                             return(
@@ -69,10 +100,18 @@ const ChangeUserRole = ({
                         })
                     }
                 </select>
+              </div>
+
+              {/* Submit Button */}
+              <div className='pt-4'>
+                <button 
+                  className='w-full py-3 px-6 rounded-lg bg-red-500 text-white font-semibold hover:bg-red-600 transition-all shadow-sm hover:shadow-md' 
+                  onClick={updateUserRole}
+                >
+                  Change Role
+                </button>
+              </div>
             </div>
-
-
-            <button className='w-fit mx-auto block  py-1 px-3 rounded-full bg-red-600 text-white hover:bg-red-700' onClick={updateUserRole}>Change Role</button>
        </div>
     </div>
   )

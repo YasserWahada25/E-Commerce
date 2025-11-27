@@ -18,7 +18,8 @@ const UploadProduct = ({
     productImage : [], // Stores preview URLs
     description : "",
     price : "",
-    sellingPrice : ""
+    sellingPrice : "",
+    stock : ""
   })
   const [uploadImages, setUploadImages] = useState([]) // Stores File objects
   const [openFullScreenImage,setOpenFullScreenImage] = useState(false)
@@ -98,6 +99,7 @@ const UploadProduct = ({
     formData.append('description', data.description);
     formData.append('price', data.price);
     formData.append('sellingPrice', data.sellingPrice);
+    formData.append('stock', data.stock || 0);
 
     uploadImages.forEach((image) => {
         formData.append('productImage', image);
@@ -272,6 +274,21 @@ const UploadProduct = ({
                   required
                 />
               </div>
+            </div>
+
+            <div>
+              <label htmlFor='stock' className='block text-sm font-semibold text-gray-700 mb-2'>Quantity (Stock)</label>
+              <input 
+                type='number' 
+                id='stock' 
+                placeholder='Enter quantity in stock' 
+                value={data.stock} 
+                name='stock'
+                onChange={handleOnChange}
+                className='input-modern w-full'
+                min='0'
+                required
+              />
             </div>
 
             <div>

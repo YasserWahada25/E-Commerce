@@ -110,12 +110,21 @@ const ModernProductCard = ({ product }) => {
         </div>
 
         {/* Add to Cart Button */}
-        <button
-          onClick={handleAddToCart}
-          className="w-full btn-primary mt-4 py-3 text-sm font-semibold"
-        >
-          Add to Cart
-        </button>
+        {product?.stock > 0 ? (
+          <button
+            onClick={handleAddToCart}
+            className='w-full btn-primary mt-4 py-3 text-sm font-semibold'
+          >
+            Add to Cart
+          </button>
+        ) : (
+          <button
+            disabled
+            className='w-full mt-4 py-3 text-sm font-semibold bg-gray-400 text-white rounded-lg cursor-not-allowed opacity-60'
+          >
+            SOLD OUT
+          </button>
+        )}
       </div>
     </Link>
   )
