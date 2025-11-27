@@ -1,10 +1,12 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import SummaryApi from '../common'
 import { FaStar, FaMinus, FaPlus, FaTruck, FaUndo } from "react-icons/fa";
 import displayINRCurrency from '../helpers/displayCurrency';
 import addToCart from '../helpers/addToCart';
 import Context from '../context';
+import { toast } from 'react-toastify';
 
 const ProductDetails = () => {
   const [data, setData] = useState({
@@ -28,6 +30,7 @@ const ProductDetails = () => {
 
   const { fetchUserAddToCart } = useContext(Context)
   const navigate = useNavigate()
+  const user = useSelector(state => state?.user?.user)
 
   const fetchProductDetails = async () => {
     setLoading(true)
@@ -55,12 +58,28 @@ const ProductDetails = () => {
   }, [params])
 
   const handleAddToCart = async (e, id) => {
-    await addToCart(e, id)
+    // Check if user is logged in
+    if (!user || !user._id) {
+      toast.error("Please login to continue")
+      sessionStorage.setItem('redirectAfterLogin', window.location.pathname)
+      navigate('/login')
+      return
+    }
+
+    await addToCart(e, id, user, navigate)
     fetchUserAddToCart()
   }
 
   const handleBuyProduct = async (e, id) => {
-    await addToCart(e, id)
+    // Check if user is logged in
+    if (!user || !user._id) {
+      toast.error("Please login to continue")
+      sessionStorage.setItem('redirectAfterLogin', window.location.pathname)
+      navigate('/login')
+      return
+    }
+
+    await addToCart(e, id, user, navigate)
     fetchUserAddToCart()
     navigate("/cart")
   }

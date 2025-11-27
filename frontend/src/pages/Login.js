@@ -42,7 +42,20 @@ const Login = () => {
 
         if (dataApi.success) {
             toast.success(dataApi.message)
-            navigate('/')
+            
+            // Check for redirect URL
+            const redirectUrl = sessionStorage.getItem('redirectAfterLogin')
+            
+            if (redirectUrl) {
+                // Clear the stored URL
+                sessionStorage.removeItem('redirectAfterLogin')
+                // Navigate to the stored URL
+                navigate(redirectUrl)
+            } else {
+                // Default navigation to home
+                navigate('/')
+            }
+            
             fetchUserDetails()
             fetchUserAddToCart()
         }

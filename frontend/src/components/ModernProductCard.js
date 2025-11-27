@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import { FaStar, FaRegHeart, FaHeart } from 'react-icons/fa'
 import displayINRCurrency from '../helpers/displayCurrency'
 import addToCart from '../helpers/addToCart'
@@ -8,11 +9,13 @@ import Context from '../context'
 const ModernProductCard = ({ product }) => {
   const [isFavorite, setIsFavorite] = useState(false)
   const { fetchUserAddToCart } = useContext(Context)
+  const navigate = useNavigate()
+  const user = useSelector(state => state?.user?.user)
 
   const handleAddToCart = async (e) => {
     e.preventDefault()
     e.stopPropagation()
-    await addToCart(e, product?._id)
+    await addToCart(e, product?._id, user, navigate)
     fetchUserAddToCart()
   }
 

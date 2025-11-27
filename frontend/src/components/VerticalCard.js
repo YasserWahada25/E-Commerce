@@ -3,14 +3,17 @@ import scrollTop from '../helpers/scrollTop'
 import displayINRCurrency from '../helpers/displayCurrency'
 import Context from '../context'
 import addToCart from '../helpers/addToCart'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 const VerticalCard = ({loading,data = []}) => {
     const loadingList = new Array(13).fill(null)
     const { fetchUserAddToCart } = useContext(Context)
+    const navigate = useNavigate()
+    const user = useSelector(state => state?.user?.user)
 
     const handleAddToCart = async(e,id)=>{
-       await addToCart(e,id)
+       await addToCart(e, id, user, navigate)
        fetchUserAddToCart()
     }
 
