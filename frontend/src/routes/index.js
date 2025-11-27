@@ -9,6 +9,7 @@ import SignUp from '../pages/SignUp'
 import AdminPanel from '../pages/AdminPanel'
 import AllUsers from '../pages/AllUsers'
 import AllProducts from '../pages/AllProducts'
+import Categories from '../pages/Categories'
 import CategoryProduct from '../pages/CategoryProduct'
 import ProductDetails from '../pages/ProductDetails'
 import Cart from '../pages/Cart'
@@ -46,6 +47,10 @@ const router = createBrowserRouter([
             {
                 path : "sign-up",
                 element : <SignUp/>
+            },
+            {
+                path : "categories",
+                element : <Categories/>
             },
             {
                 path : "product-category",

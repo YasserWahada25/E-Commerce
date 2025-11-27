@@ -1,7 +1,7 @@
 import React, { useContext, useState, useEffect, useRef } from 'react'
 import Logo from './Logo'
 import { GrSearch } from "react-icons/gr";
-import { FaRegCircleUser, FaChevronDown } from "react-icons/fa6";
+import { FaRegCircleUser } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,13 +10,11 @@ import { toast } from 'react-toastify'
 import { setUserDetails } from '../store/userSlice';
 import ROLE from '../common/role';
 import Context from '../context';
-import CategoryDropdown from './CategoryDropdown';
 
 const Header = () => {
   const user = useSelector(state => state?.user?.user)
   const dispatch = useDispatch()
   const [menuDisplay, setMenuDisplay] = useState(false)
-  const [categoryDropdown, setCategoryDropdown] = useState(false)
   const context = useContext(Context)
   const navigate = useNavigate()
   const searchInput = useLocation()
@@ -83,13 +81,6 @@ const Header = () => {
 
           {/* Navigation Links - Desktop */}
           <nav className='hidden lg:flex items-center gap-6'>
-            <button
-              onClick={() => setCategoryDropdown(!categoryDropdown)}
-              className='flex items-center gap-2 text-gray-700 hover:text-indigo-600 font-medium transition-colors relative'
-            >
-              Categories
-              <FaChevronDown className={`text-xs transition-transform ${categoryDropdown ? 'rotate-180' : ''}`} />
-            </button>
             <Link 
               to="/" 
               className={`relative text-gray-700 hover:text-indigo-600 font-medium transition-all pb-1 ${
@@ -99,6 +90,16 @@ const Header = () => {
               }`}
             >
               Home
+            </Link>
+            <Link 
+              to="/categories" 
+              className={`relative text-gray-700 hover:text-indigo-600 font-medium transition-all pb-1 ${
+                searchInput.pathname === '/categories' 
+                  ? 'text-indigo-600 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-indigo-600' 
+                  : ''
+              }`}
+            >
+              Categories
             </Link>
             <Link 
               to="/about" 
@@ -216,14 +217,6 @@ const Header = () => {
             )}
           </div>
         </div>
-      </div>
-
-      {/* Category Dropdown */}
-      <div className='relative'>
-        <CategoryDropdown
-          isOpen={categoryDropdown}
-          onClose={() => setCategoryDropdown(false)}
-        />
       </div>
     </header>
   )
