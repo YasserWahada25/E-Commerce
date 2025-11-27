@@ -124,6 +124,10 @@ const SummaryApi = {
     updateReclamationStatus : {
         url : `${backendDomin}/api/admin/reclamations/status`,
         method : 'put'
+    },
+    adminStats : {
+        url : `${backendDomin}/api/admin/stats`,
+        method : 'get'
     }
 }
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { FaRegCircleUser, FaUsers, FaBoxOpen, FaEnvelope } from "react-icons/fa6";
+import { FaRegCircleUser, FaUsers, FaBoxOpen, FaEnvelope, FaChartBar } from "react-icons/fa6";
 import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import ROLE from '../common/role';
 import SummaryApi from '../common';
@@ -82,6 +82,18 @@ const AdminPanel = () => {
                 {/* Navigation */}
                 <nav className='p-4'>
                     <div className='space-y-2'>
+                        <Link 
+                            to={"dashboard"} 
+                            className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all ${
+                                isActive('dashboard')
+                                    ? 'bg-indigo-600 text-white shadow-md'
+                                    : 'text-gray-700 hover:bg-indigo-50 hover:text-indigo-600'
+                            }`}
+                        >
+                            <FaChartBar className='text-lg' />
+                            <span>Dashboard</span>
+                        </Link>
+                        
                         <Link 
                             to={"all-users"} 
                             className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-all ${

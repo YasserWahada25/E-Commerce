@@ -7,6 +7,7 @@ import VerifyResetCode from '../pages/VerifyResetCode'
 import ResetPassword from '../pages/ResetPassword'
 import SignUp from '../pages/SignUp'
 import AdminPanel from '../pages/AdminPanel'
+import AdminStats from '../pages/AdminStats'
 import AllUsers from '../pages/AllUsers'
 import AllProducts from '../pages/AllProducts'
 import Categories from '../pages/Categories'
@@ -80,6 +81,10 @@ const router = createBrowserRouter([
                 path : "admin-panel",
                 element : <AdminPanel/>,
                 children : [
+                    {
+                        path : "dashboard",
+                        element : <AdminStats/>
+                    },
                     {
                         path : "all-users",
                         element : <AllUsers/>

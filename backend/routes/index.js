@@ -35,6 +35,8 @@ const getAllReclamationsController = require('../controller/reclamation/getAllRe
 const getReclamationsCountController = require('../controller/reclamation/getReclamationsCount')
 const updateReclamationStatusController = require('../controller/reclamation/updateReclamationStatus')
 
+const getAdminStatsController = require('../controller/admin/getStats')
+
 const upload = require('../middleware/multer')
 
 router.post("/signup",userSignUpController)
@@ -51,6 +53,7 @@ router.post("/reset-password",resetPasswordController)
 router.get("/all-user",authToken,allUsers)
 router.post("/update-user",authToken,updateUser)
 router.get("/admin-profile",authToken,adminProfileController)
+router.get("/admin/stats",authToken,getAdminStatsController)
 
 //user profile
 router.get("/user-profile",authToken,userProfileController)
