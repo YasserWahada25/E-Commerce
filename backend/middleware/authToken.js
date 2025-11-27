@@ -1,24 +1,24 @@
 const jwt = require('jsonwebtoken')
 
-async function authToken(req,res,next){
-    try{
+async function authToken(req, res, next) {
+    try {
         const token = req.cookies?.token
 
-        if(!token){
+        if (!token) {
             return res.status(401).json({
-                message : "Please Login...!",
-                error : true,
-                success : false
+                message: "Please Login...!",
+                error: true,
+                success: false
             })
         }
 
-        jwt.verify(token, process.env.TOKEN_SECRET_KEY, function(err, decoded) {
-            if(err){
+        jwt.verify(token, process.env.JWT_SECRET, function (err, decoded) {
+            if (err) {
                 console.log("error auth", err)
                 return res.status(401).json({
-                    message : "Unauthorized access",
-                    error : true,
-                    success : false
+                    message: "Unauthorized access",
+                    error: true,
+                    success: false
                 })
             }
 
@@ -28,12 +28,12 @@ async function authToken(req,res,next){
         });
 
 
-    }catch(err){
+    } catch (err) {
         res.status(500).json({
-            message : err.message || err,
-            data : [],
-            error : true,
-            success : false
+            message: err.message || err,
+            data: [],
+            error: true,
+            success: false
         })
     }
 }
