@@ -29,6 +29,11 @@ const forgotPasswordController = require('../controller/user/forgotPassword')
 const verifyResetCodeController = require('../controller/user/verifyResetCode')
 const resetPasswordController = require('../controller/user/resetPassword')
 
+const createReclamationController = require('../controller/reclamation/createReclamation')
+const getAllReclamationsController = require('../controller/reclamation/getAllReclamations')
+const getReclamationsCountController = require('../controller/reclamation/getReclamationsCount')
+const updateReclamationStatusController = require('../controller/reclamation/updateReclamationStatus')
+
 const upload = require('../middleware/multer')
 
 router.post("/signup",userSignUpController)
@@ -66,5 +71,11 @@ router.get("/countAddToCartProduct",authToken,countAddToCartProduct)
 router.get("/view-card-product",authToken,addToCartViewProduct)
 router.post("/update-cart-product",authToken,updateAddToCartProduct)
 router.post("/delete-cart-product",authToken,deleteAddToCartProduct)
+
+//reclamations
+router.post("/reclamations",authToken,createReclamationController)
+router.get("/admin/reclamations",authToken,getAllReclamationsController)
+router.get("/admin/reclamations/count",authToken,getReclamationsCountController)
+router.put("/admin/reclamations/status",authToken,updateReclamationStatusController)
 
 module.exports = router

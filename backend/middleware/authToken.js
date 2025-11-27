@@ -5,7 +5,7 @@ async function authToken(req,res,next){
         const token = req.cookies?.token
 
         if(!token){
-            return res.status(200).json({
+            return res.status(401).json({
                 message : "Please Login...!",
                 error : true,
                 success : false
@@ -15,6 +15,11 @@ async function authToken(req,res,next){
         jwt.verify(token, process.env.TOKEN_SECRET_KEY, function(err, decoded) {
             if(err){
                 console.log("error auth", err)
+                return res.status(401).json({
+                    message : "Unauthorized access",
+                    error : true,
+                    success : false
+                })
             }
 
             req.userId = decoded?._id
@@ -24,7 +29,7 @@ async function authToken(req,res,next){
 
 
     }catch(err){
-        res.status(400).json({
+        res.status(500).json({
             message : err.message || err,
             data : [],
             error : true,

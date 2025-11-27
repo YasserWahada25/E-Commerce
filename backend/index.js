@@ -1,7 +1,11 @@
 const express = require('express')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
-require('dotenv').config()
+const path = require('path')
+
+// Charger les variables d'environnement avec un path explicite
+require('dotenv').config({ path: path.join(__dirname, '.env') })
+
 const connectDB = require('./config/db')
 const router = require('./routes')
 

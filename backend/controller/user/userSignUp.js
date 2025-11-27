@@ -1,5 +1,6 @@
 const userModel = require("../../models/userModel")
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcryptjs')
+const ROLE = require("../../common/role")
 
 
 async function userSignUpController(req,res){
@@ -33,7 +34,7 @@ async function userSignUpController(req,res){
 
         const payload = {
             ...req.body,
-            role : "GENERAL",
+            role : ROLE.GENERAL,
             password : hashPassword
         }
 

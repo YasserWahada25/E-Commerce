@@ -1,17 +1,47 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { FaRegCircleUser, FaUsers, FaBoxOpen } from "react-icons/fa6";
+import { FaRegCircleUser, FaUsers, FaBoxOpen, FaEnvelope } from "react-icons/fa6";
 import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import ROLE from '../common/role';
+import SummaryApi from '../common';
 
 const AdminPanel = () => {
     const user = useSelector(state => state?.user?.user)
     const navigate = useNavigate()
     const location = useLocation()
+    const [reclamationCount, setReclamationCount] = useState(0)
 
     useEffect(() => {
         if (user?.role !== ROLE.ADMIN) {
             navigate("/")
+        }
+    }, [user])
+
+    // Fetch reclamation count
+    const fetchReclamationCount = async () => {
+        try {
+            const response = await fetch(SummaryApi.reclamationsCount.url, {
+                method: SummaryApi.reclamationsCount.method,
+                headers: {
+                    authorization: `Bearer ${localStorage.getItem('token')}`
+                },
+                credentials: 'include'
+            })
+            const data = await response.json()
+            if (data.success) {
+                setReclamationCount(data.data.count)
+            }
+        } catch (error) {
+            console.error("Failed to fetch reclamation count", error)
+        }
+    }
+
+    useEffect(() => {
+        if (user?.role === ROLE.ADMIN) {
+            fetchReclamationCount()
+            // Poll every 30 seconds for updates
+            const interval = setInterval(fetchReclamationCount, 30000)
+            return () => clearInterval(interval)
         }
     }, [user])
 
@@ -74,6 +104,29 @@ const AdminPanel = () => {
                         >
                             <FaBoxOpen className='text-lg' />
                             <span>All Products</span>
+                        </Link>
+
+                        <Link 
+                            to={"reclamations"} 
+                            className={`flex items-center justify-between px-4 py-3 rounded-lg font-medium transition-all ${
+                                isActive('reclamations')
+                                    ? 'bg-indigo-600 text-white shadow-md'
+                                    : 'text-gray-700 hover:bg-indigo-50 hover:text-indigo-600'
+                            }`}
+                        >
+                            <div className='flex items-center gap-3'>
+                                <FaEnvelope className='text-lg' />
+                                <span>Reclamations</span>
+                            </div>
+                            {reclamationCount > 0 && (
+                                <span className={`text-xs font-bold px-2 py-0.5 rounded-full ${
+                                    isActive('reclamations') 
+                                        ? 'bg-white text-indigo-600' 
+                                        : 'bg-indigo-600 text-white'
+                                }`}>
+                                    {reclamationCount}
+                                </span>
+                            )}
                         </Link>
                     </div>
                 </nav>

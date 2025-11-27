@@ -1,10 +1,11 @@
 const userModel = require("../../models/userModel")
+const ROLE = require("../../common/role")
 
 async function adminProfileController(req,res){
     try{
         const user = await userModel.findById(req.userId)
 
-        if(user.role !== 'ADMIN'){
+        if(user.role !== ROLE.ADMIN){
              throw new Error("Permission denied")
         }
 

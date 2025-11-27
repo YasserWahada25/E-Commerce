@@ -100,6 +100,26 @@ const SummaryApi = {
     resetPassword : {
         url : `${backendDomin}/api/reset-password`,
         method : 'post'
+    },
+    createReclamation : {
+        url : `${backendDomin}/api/reclamations`,
+        method : 'post'
+    },
+    allReclamations : {
+        url : `${backendDomin}/api/admin/reclamations`,
+        method : 'get'
+    },
+    reclamationsCount : {
+        url : `${backendDomin}/api/admin/reclamations/count`,
+        method : 'get'
+    },
+    reclamationDetails : {
+        url : `${backendDomin}/api/admin/reclamations`,
+        method : 'get'
+    },
+    updateReclamationStatus : {
+        url : `${backendDomin}/api/admin/reclamations/status`,
+        method : 'put'
     }
 }
 

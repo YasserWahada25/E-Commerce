@@ -90,14 +90,35 @@ const Header = () => {
               Categories
               <FaChevronDown className={`text-xs transition-transform ${categoryDropdown ? 'rotate-180' : ''}`} />
             </button>
-            <Link to="/deals" className='text-gray-700 hover:text-indigo-600 font-medium transition-colors'>
-              Deals
+            <Link 
+              to="/" 
+              className={`relative text-gray-700 hover:text-indigo-600 font-medium transition-all pb-1 ${
+                searchInput.pathname === '/' 
+                  ? 'text-indigo-600 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-indigo-600' 
+                  : ''
+              }`}
+            >
+              Home
             </Link>
-            <Link to="/new" className='text-gray-700 hover:text-indigo-600 font-medium transition-colors'>
-              What's New
+            <Link 
+              to="/about" 
+              className={`relative text-gray-700 hover:text-indigo-600 font-medium transition-all pb-1 ${
+                searchInput.pathname === '/about' 
+                  ? 'text-indigo-600 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-indigo-600' 
+                  : ''
+              }`}
+            >
+              About
             </Link>
-            <Link to="/delivery" className='text-gray-700 hover:text-indigo-600 font-medium transition-colors'>
-              Delivery
+            <Link 
+              to="/contact" 
+              className={`relative text-gray-700 hover:text-indigo-600 font-medium transition-all pb-1 ${
+                searchInput.pathname === '/contact' 
+                  ? 'text-indigo-600 after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-indigo-600' 
+                  : ''
+              }`}
+            >
+              Contact Us
             </Link>
           </nav>
         </div>
