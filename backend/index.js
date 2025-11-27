@@ -15,7 +15,7 @@ const allowedOrigins = [
     process.env.FRONTEND_URL,
     "http://localhost:3000",
     "https://monumental-seahorse-2a09c2.netlify.app",
-    "https://e-commerce-3ilu.onrender.com"
+    "https://e-commerce-harl.onrender.com"
 ];
 
 app.use(cors({
