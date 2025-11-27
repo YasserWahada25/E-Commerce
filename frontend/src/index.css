@@ -386,3 +386,24 @@ details[open] summary::after {
   transform: rotate(180deg);
 }
 
+/* Animation pour le bouton Back to Top */
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Animation pour le popup de recherche */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInDown {
+  animation: fadeInDown 0.3s ease-in-out;
+}
+

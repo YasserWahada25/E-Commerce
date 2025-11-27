@@ -3,6 +3,7 @@ import './App.css';
 import { Outlet } from 'react-router-dom';
 import Header from './components/Header';
 import Footer from './components/Footer';
+import BackToTop from './components/BackToTop';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect, useState } from 'react';
@@ -62,6 +63,7 @@ function App() {
           <Outlet/>
         </main>
         <Footer/>
+        <BackToTop/>
       </Context.Provider>
     </>
   );
