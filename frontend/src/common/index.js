@@ -21,6 +21,14 @@ const SummaryApi = {
         url : `${backendDomin}/api/all-user`,
         method : 'get'
     },
+    adminProfile : {
+        url : `${backendDomin}/api/admin-profile`,
+        method : 'get'
+    },
+    userProfile : {
+        url : `${backendDomin}/api/user-profile`,
+        method : 'get'
+    },
     updateUser : {
         url : `${backendDomin}/api/update-user`,
         method : "post"
@@ -39,6 +47,10 @@ const SummaryApi = {
     },
     categoryProduct : {
         url : `${backendDomin}/api/get-categoryProduct`,
+        method : 'get'
+    },
+    categoriesWithCount : {
+        url : `${backendDomin}/api/categories-with-count`,
         method : 'get'
     },
     categoryWiseProduct : {

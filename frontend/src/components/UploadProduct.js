@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { CgClose } from "react-icons/cg";
 import productCategory from '../helpers/productCategory';
 import { FaCloudUploadAlt } from "react-icons/fa";
-import uploadImage from '../helpers/uploadImage';
 import DisplayImage from './DisplayImage';
 import { MdDelete } from "react-icons/md";
 import SummaryApi from '../common';
@@ -16,11 +15,12 @@ const UploadProduct = ({
     productName : "",
     brandName : "",
     category : "",
-    productImage : [],
+    productImage : [], // Stores preview URLs
     description : "",
     price : "",
     sellingPrice : ""
   })
+  const [uploadImages, setUploadImages] = useState([]) // Stores File objects
   const [openFullScreenImage,setOpenFullScreenImage] = useState(false)
   const [fullScreenImage,setFullScreenImage] = useState("")
 
@@ -38,21 +38,44 @@ const UploadProduct = ({
 
   const handleUploadProduct = async(e) => {
     const file = e.target.files[0]
-    const uploadImageCloudinary = await uploadImage(file)
+    
+    if(!file){
+        return
+    }
+
+    // Validate file type
+    const allowedTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/gif'];
+    if (!allowedTypes.includes(file.type)) {
+        toast.error("Only JPEG, PNG, and GIF images are allowed");
+        return;
+    }
+
+    // Validate file size (e.g., 5MB)
+    const maxSize = 5 * 1024 * 1024;
+    if (file.size > maxSize) {
+        toast.error("File size must be less than 5MB");
+        return;
+    }
+
+    // Create local preview
+    const previewUrl = URL.createObjectURL(file);
 
     setData((preve)=>{
       return{
         ...preve,
-        productImage : [ ...preve.productImage, uploadImageCloudinary.url]
+        productImage : [ ...preve.productImage, previewUrl]
       }
     })
+
+    setUploadImages((prev) => [...prev, file])
   }
 
   const handleDeleteProductImage = async(index)=>{
-    console.log("image index",index)
-    
     const newProductImage = [...data.productImage]
     newProductImage.splice(index,1)
+
+    const newUploadImages = [...uploadImages]
+    newUploadImages.splice(index, 1)
 
     setData((preve)=>{
       return{
@@ -60,7 +83,7 @@ const UploadProduct = ({
         productImage : [...newProductImage]
       }
     })
-    
+    setUploadImages(newUploadImages)
   }
 
 
@@ -68,13 +91,23 @@ const UploadProduct = ({
   const handleSubmit = async(e) =>{
     e.preventDefault()
     
+    const formData = new FormData();
+    formData.append('productName', data.productName);
+    formData.append('brandName', data.brandName);
+    formData.append('category', data.category);
+    formData.append('description', data.description);
+    formData.append('price', data.price);
+    formData.append('sellingPrice', data.sellingPrice);
+
+    uploadImages.forEach((image) => {
+        formData.append('productImage', image);
+    });
+
     const response = await fetch(SummaryApi.uploadProduct.url,{
       method : SummaryApi.uploadProduct.method,
       credentials : 'include',
-      headers : {
-        "content-type" : "application/json"
-      },
-      body : JSON.stringify(data)
+      // No headers needed for FormData, browser sets multipart/form-data with boundary
+      body : formData
     })
 
     const responseData = await response.json()

@@ -9,7 +9,17 @@ async function UploadProductController(req,res){
             throw new Error("Permission denied")
         }
     
-        const uploadProduct = new productModel(req.body)
+        let imageUrls = [];
+        if (req.files && req.files.length > 0) {
+            imageUrls = req.files.map(file => `${process.env.BACKEND_URL}/uploads/${file.filename}`);
+        }
+
+        const productData = {
+            ...req.body,
+            productImage: imageUrls
+        }
+
+        const uploadProduct = new productModel(productData)
         const saveProduct = await uploadProduct.save()
 
         res.status(201).json({

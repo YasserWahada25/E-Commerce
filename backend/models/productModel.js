@@ -7,7 +7,23 @@ const productSchema = mongoose.Schema({
     productImage : [],
     description : String,
     price : Number,
-    sellingPrice : Number
+    sellingPrice : Number,
+    rating : {
+        type: Number,
+        default: 4.5
+    },
+    ratingCount : {
+        type: Number,
+        default: 0
+    },
+    colors : {
+        type: [String],
+        default: []
+    },
+    stock : {
+        type: Number,
+        default: 0
+    }
 },{
     timestamps : true
 })

@@ -11,6 +11,8 @@ import CategoryProduct from '../pages/CategoryProduct'
 import ProductDetails from '../pages/ProductDetails'
 import Cart from '../pages/Cart'
 import SearchProduct from '../pages/SearchProduct'
+import AdminProfile from '../pages/AdminProfile'
+import UserProfile from '../pages/UserProfile'
 
 const router = createBrowserRouter([
     {
@@ -62,6 +64,14 @@ const router = createBrowserRouter([
                         element : <AllProducts/>
                     }
                 ]
+            },
+            {
+                path : "admin/profile",
+                element : <AdminProfile/>
+            },
+            {
+                path : "profile",
+                element : <UserProfile/>
             },
         ]
     }

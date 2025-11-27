@@ -22,8 +22,11 @@ const updateAddToCartProduct = require('../controller/user/updateAddToCartProduc
 const deleteAddToCartProduct = require('../controller/user/deleteAddToCartProduct')
 const searchProduct = require('../controller/product/searchProduct')
 const filterProductController = require('../controller/product/filterProduct')
+const adminProfileController = require('../controller/user/adminProfile')
+const userProfileController = require('../controller/user/userProfile')
+const getCategoriesWithCount = require('../controller/product/getCategoriesWithCount')
 
-
+const upload = require('../middleware/multer')
 
 router.post("/signup",userSignUpController)
 router.post("/signin",userSignInController)
@@ -33,12 +36,17 @@ router.get("/userLogout",userLogout)
 //admin panel 
 router.get("/all-user",authToken,allUsers)
 router.post("/update-user",authToken,updateUser)
+router.get("/admin-profile",authToken,adminProfileController)
+
+//user profile
+router.get("/user-profile",authToken,userProfileController)
 
 //product
-router.post("/upload-product",authToken,UploadProductController)
+router.post("/upload-product",authToken,upload.array('productImage'),UploadProductController)
 router.get("/get-product",getProductController)
 router.post("/update-product",authToken,updateProductController)
 router.get("/get-categoryProduct",getCategoryProduct)
+router.get("/categories-with-count",getCategoriesWithCount)
 router.post("/category-product",getCategoryWiseProduct)
 router.post("/product-details",getProductDetails)
 router.get("/search",searchProduct)
@@ -50,11 +58,5 @@ router.get("/countAddToCartProduct",authToken,countAddToCartProduct)
 router.get("/view-card-product",authToken,addToCartViewProduct)
 router.post("/update-cart-product",authToken,updateAddToCartProduct)
 router.post("/delete-cart-product",authToken,deleteAddToCartProduct)
-
-
-
-
-
-
 
 module.exports = router
