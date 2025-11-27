@@ -48,22 +48,22 @@ const ModernProductCard = ({ product }) => {
   return (
     <Link 
       to={`/product/${product?._id}`} 
-      className="card-modern group relative overflow-hidden bg-white p-4 block"
+      className="card-modern group relative overflow-hidden bg-white p-3 sm:p-4 block"
     >
       {/* Favorite Icon */}
       <button
         onClick={toggleFavorite}
-        className="absolute top-6 right-6 z-10 p-2 rounded-full bg-white shadow-md hover:shadow-lg transition-all"
+        className="absolute top-4 right-4 sm:top-6 sm:right-6 z-10 p-1.5 sm:p-2 rounded-full bg-white shadow-md hover:shadow-lg transition-all"
       >
         {isFavorite ? (
-          <FaHeart className="text-red-500 text-lg" />
+          <FaHeart className="text-red-500 text-sm sm:text-base lg:text-lg" />
         ) : (
-          <FaRegHeart className="text-gray-400 text-lg hover:text-red-500 transition-colors" />
+          <FaRegHeart className="text-gray-400 text-sm sm:text-base lg:text-lg hover:text-red-500 transition-colors" />
         )}
       </button>
 
       {/* Product Image */}
-      <div className="relative h-64 flex items-center justify-center mb-4 bg-gray-50 rounded-xl overflow-hidden">
+      <div className="relative h-48 sm:h-56 lg:h-64 flex items-center justify-center mb-3 sm:mb-4 bg-gray-50 rounded-lg sm:rounded-xl overflow-hidden">
         <img
           src={product?.productImage?.[0]}
           alt={product?.productName}
@@ -72,41 +72,41 @@ const ModernProductCard = ({ product }) => {
       </div>
 
       {/* Product Info */}
-      <div className="space-y-2">
+      <div className="space-y-1.5 sm:space-y-2">
         {/* Brand Badge */}
         {product?.brandName && (
-          <span className="badge badge-primary text-xs">
+          <span className="badge badge-primary text-[10px] sm:text-xs">
             {product.brandName}
           </span>
         )}
 
         {/* Product Name */}
-        <h3 className="font-semibold text-base text-gray-900 line-clamp-2 min-h-[3rem]">
+        <h3 className="font-semibold text-sm sm:text-base text-gray-900 line-clamp-2 min-h-[2.5rem] sm:min-h-[3rem]">
           {product?.productName}
         </h3>
 
         {/* Description */}
-        <p className="text-sm text-gray-500 line-clamp-2 min-h-[2.5rem]">
+        <p className="hidden sm:block text-xs sm:text-sm text-gray-500 line-clamp-2 min-h-[2.5rem]">
           {product?.description || 'High quality product with excellent features'}
         </p>
 
         {/* Rating */}
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 sm:gap-2">
           <div className="flex items-center gap-0.5">
             {renderStars()}
           </div>
-          <span className="text-sm text-gray-600">
+          <span className="text-xs sm:text-sm text-gray-600">
             ({product?.ratingCount || 0})
           </span>
         </div>
 
         {/* Price */}
-        <div className="flex items-center gap-3 pt-2">
-          <span className="text-2xl font-bold text-indigo-600">
+        <div className="flex items-center gap-2 sm:gap-3 pt-1 sm:pt-2">
+          <span className="text-lg sm:text-xl lg:text-2xl font-bold text-indigo-600">
             {displayINRCurrency(product?.sellingPrice)}
           </span>
           {product?.price && product?.price !== product?.sellingPrice && (
-            <span className="text-sm text-gray-400 line-through">
+            <span className="text-xs sm:text-sm text-gray-400 line-through">
               {displayINRCurrency(product?.price)}
             </span>
           )}
@@ -116,14 +116,14 @@ const ModernProductCard = ({ product }) => {
         {product?.stock > 0 ? (
           <button
             onClick={handleAddToCart}
-            className='w-full btn-primary mt-4 py-3 text-sm font-semibold'
+            className='w-full btn-primary mt-3 sm:mt-4 py-2 sm:py-2.5 lg:py-3 text-xs sm:text-sm font-semibold'
           >
             Add to Cart
           </button>
         ) : (
           <button
             disabled
-            className='w-full mt-4 py-3 text-sm font-semibold bg-gray-400 text-white rounded-lg cursor-not-allowed opacity-60'
+            className='w-full mt-3 sm:mt-4 py-2 sm:py-2.5 lg:py-3 text-xs sm:text-sm font-semibold bg-gray-400 text-white rounded-lg cursor-not-allowed opacity-60'
           >
             SOLD OUT
           </button>

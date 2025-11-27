@@ -92,10 +92,10 @@ const CategoryProduct = () => {
   }
 
   return (
-    <div className='min-h-screen bg-gray-50'>
+    <div className='min-h-screen bg-gray-50 pt-16 sm:pt-20'>
       {/* Desktop version */}
-      <div className='container mx-auto px-6 py-8'>
-        <div className='hidden lg:grid grid-cols-[280px,1fr] gap-6'>
+      <div className='container mx-auto px-3 sm:px-6 py-6 sm:py-8'>
+        <div className='hidden lg:grid grid-cols-[280px,1fr] gap-4 lg:gap-6'>
           {/* Left side - Filters */}
           <div className='space-y-6'>
             {/* Sort by */}
@@ -162,11 +162,11 @@ const CategoryProduct = () => {
 
           {/* Right side - Products */}
           <div>
-            <div className='mb-6'>
-              <h2 className='text-2xl font-bold text-gray-900'>
+            <div className='mb-4 sm:mb-6'>
+              <h2 className='text-xl sm:text-2xl font-bold text-gray-900'>
                 {filterCategoryList.length > 0 ? 'Filtered Products' : 'All Products'}
               </h2>
-              <p className='text-gray-600 mt-1'>
+              <p className='text-sm sm:text-base text-gray-600 mt-1'>
                 {data.length} products available
               </p>
             </div>
@@ -195,10 +195,10 @@ const CategoryProduct = () => {
                     ))}
                   </div>
                 ) : (
-                  <div className='text-center py-16'>
-                    <div className='text-6xl mb-4'>🔍</div>
-                    <h3 className='text-2xl font-bold text-gray-900 mb-2'>No products found</h3>
-                    <p className='text-gray-600'>
+                  <div className='text-center py-12 sm:py-16'>
+                    <div className='text-4xl sm:text-6xl mb-3 sm:mb-4'>🔍</div>
+                    <h3 className='text-xl sm:text-2xl font-bold text-gray-900 mb-2'>No products found</h3>
+                    <p className='text-sm sm:text-base text-gray-600'>
                       {filterCategoryList.length > 0 
                         ? 'Try selecting different categories or adjust your filters'
                         : 'No products available at the moment'}
@@ -212,20 +212,20 @@ const CategoryProduct = () => {
 
         {/* Mobile version */}
         <div className='lg:hidden'>
-          <div className='mb-6'>
-            <h2 className='text-2xl font-bold text-gray-900'>
+          <div className='mb-4 sm:mb-6'>
+            <h2 className='text-xl sm:text-2xl font-bold text-gray-900'>
               {filterCategoryList.length > 0 ? 'Filtered Products' : 'All Products'}
             </h2>
-            <p className='text-gray-600 mt-1'>
+            <p className='text-sm sm:text-base text-gray-600 mt-1'>
               {data.length} products available
             </p>
           </div>
 
           {/* Mobile Filters - Collapsible */}
-          <div className='mb-6 space-y-4'>
-            <details className='card-modern p-4'>
-              <summary className='font-bold text-gray-900 cursor-pointer'>Sort By</summary>
-              <form className='space-y-3 mt-4'>
+          <div className='mb-4 sm:mb-6 space-y-3 sm:space-y-4'>
+            <details className='card-modern p-3 sm:p-4'>
+              <summary className='font-bold text-sm sm:text-base text-gray-900 cursor-pointer'>Sort By</summary>
+              <form className='space-y-2 sm:space-y-3 mt-3 sm:mt-4'>
                 <label className='filter-option'>
                   <input 
                     type='radio' 
@@ -252,9 +252,9 @@ const CategoryProduct = () => {
               </form>
             </details>
 
-            <details className='card-modern p-4'>
-              <summary className='font-bold text-gray-900 cursor-pointer'>Categories</summary>
-              <form className='space-y-3 mt-4'>
+            <details className='card-modern p-3 sm:p-4'>
+              <summary className='font-bold text-sm sm:text-base text-gray-900 cursor-pointer'>Categories</summary>
+              <form className='space-y-2 sm:space-y-3 mt-3 sm:mt-4 max-h-64 overflow-y-auto'>
                 {productCategory.map((categoryName, index) => {
                   const isSelected = selectCategory[categoryName?.value]
                   return (
@@ -306,10 +306,10 @@ const CategoryProduct = () => {
                   ))}
                 </div>
               ) : (
-                <div className='text-center py-16'>
-                  <div className='text-6xl mb-4'>🔍</div>
-                  <h3 className='text-2xl font-bold text-gray-900 mb-2'>No products found</h3>
-                  <p className='text-gray-600'>
+                <div className='text-center py-12 sm:py-16'>
+                  <div className='text-4xl sm:text-6xl mb-3 sm:mb-4'>🔍</div>
+                  <h3 className='text-xl sm:text-2xl font-bold text-gray-900 mb-2'>No products found</h3>
+                  <p className='text-sm sm:text-base text-gray-600'>
                     {filterCategoryList.length > 0 
                       ? 'Try selecting different categories'
                       : 'No products available'}

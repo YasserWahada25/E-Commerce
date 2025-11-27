@@ -98,25 +98,25 @@ const AdminEditProduct = ({
   }
 
   return (
-    <div className='fixed w-full h-full bg-slate-900 bg-opacity-50 top-0 left-0 right-0 bottom-0 flex justify-center items-center z-50 p-4'>
-      <div className='bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-xl'>
+    <div className='fixed w-full h-full bg-slate-900 bg-opacity-50 top-0 left-0 right-0 bottom-0 flex justify-center items-center z-50 p-2 sm:p-4 overflow-y-auto'>
+      <div className='bg-white rounded-xl sm:rounded-2xl w-full max-w-2xl max-h-[95vh] sm:max-h-[90vh] flex flex-col shadow-xl my-auto'>
             
             {/* Header */}
-            <div className='flex justify-between items-center p-6 border-b border-gray-200'>
+            <div className='flex justify-between items-center p-4 sm:p-6 border-b border-gray-200'>
                 <div>
-                  <h2 className='font-bold text-2xl text-gray-900'>Edit Product</h2>
-                  <p className='text-sm text-gray-500 mt-1'>Update product information</p>
+                  <h2 className='font-bold text-xl sm:text-2xl text-gray-900'>Edit Product</h2>
+                  <p className='text-xs sm:text-sm text-gray-500 mt-1'>Update product information</p>
                 </div>
                 <button 
-                  className='w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-500 hover:text-red-600 transition-all' 
+                  className='w-9 h-9 sm:w-10 sm:h-10 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-500 hover:text-red-600 transition-all flex-shrink-0' 
                   onClick={onClose}
                 >
-                    <CgClose className='text-2xl'/>
+                    <CgClose className='text-xl sm:text-2xl'/>
                 </button>
             </div>
 
           {/* Form */}
-          <form className='flex-1 overflow-y-auto p-6 space-y-4' onSubmit={handleSubmit}>
+          <form className='flex-1 overflow-y-auto p-4 sm:p-6 space-y-3 sm:space-y-4' onSubmit={handleSubmit}>
             <div>
               <label htmlFor='productName' className='block text-sm font-semibold text-gray-700 mb-2'>Product Name</label>
               <input 

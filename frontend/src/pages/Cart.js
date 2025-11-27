@@ -105,15 +105,15 @@ const Cart = () => {
     const totalPrice = data.reduce((preve, curr) => preve + (curr.quantity * curr?.productId?.sellingPrice), 0)
 
     return (
-        <div className='min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 py-8'>
-            <div className='container mx-auto px-4'>
+        <div className='min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 pt-20 sm:pt-24 py-6 sm:py-8'>
+            <div className='container mx-auto px-3 sm:px-4 lg:px-6'>
                 {/* Header */}
-                <div className='mb-8'>
-                    <h1 className='text-3xl font-bold text-gray-900 flex items-center gap-3'>
-                        <FaShoppingCart className='text-indigo-600' />
+                <div className='mb-6 sm:mb-8'>
+                    <h1 className='text-2xl sm:text-3xl font-bold text-gray-900 flex items-center gap-2 sm:gap-3'>
+                        <FaShoppingCart className='text-indigo-600 text-xl sm:text-2xl' />
                         Shopping Cart
                     </h1>
-                    <p className='text-gray-600 mt-2'>
+                    <p className='text-sm sm:text-base text-gray-600 mt-2'>
                         {data.length > 0 ? `${data.length} item${data.length > 1 ? 's' : ''} in your cart` : 'Your cart is empty'}
                     </p>
                 </div>
@@ -139,30 +139,30 @@ const Cart = () => {
 
                 {/* Cart Content */}
                 {data.length > 0 && (
-                    <div className='grid grid-cols-1 lg:grid-cols-3 gap-8'>
+                    <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8'>
                         {/* Cart Items */}
-                        <div className='lg:col-span-2 space-y-4'>
+                        <div className='lg:col-span-2 space-y-3 sm:space-y-4'>
                             {loading ? (
                                 loadingCart?.map((el, index) => (
-                                    <div key={el + "Add To Cart Loading" + index} className='card-modern h-48 bg-white animate-pulse'>
-                                        <div className='flex gap-4 p-4'>
-                                            <div className='w-40 h-40 bg-slate-200 rounded-lg'></div>
-                                            <div className='flex-1 space-y-3'>
-                                                <div className='h-6 bg-slate-200 rounded w-3/4'></div>
-                                                <div className='h-4 bg-slate-200 rounded w-1/2'></div>
-                                                <div className='h-8 bg-slate-200 rounded w-1/4'></div>
+                                    <div key={el + "Add To Cart Loading" + index} className='card-modern h-40 sm:h-48 bg-white animate-pulse'>
+                                        <div className='flex gap-3 sm:gap-4 p-3 sm:p-4'>
+                                            <div className='w-24 h-24 sm:w-40 sm:h-40 bg-slate-200 rounded-lg'></div>
+                                            <div className='flex-1 space-y-2 sm:space-y-3'>
+                                                <div className='h-4 sm:h-6 bg-slate-200 rounded w-3/4'></div>
+                                                <div className='h-3 sm:h-4 bg-slate-200 rounded w-1/2'></div>
+                                                <div className='h-6 sm:h-8 bg-slate-200 rounded w-1/4'></div>
                                             </div>
                                         </div>
                                     </div>
                                 ))
                             ) : (
                                 data.map((product, index) => (
-                                    <div key={product?._id + "cart-item"} className='card-modern bg-white p-4 relative group'>
-                                        <div className='flex gap-4'>
+                                    <div key={product?._id + "cart-item"} className='card-modern bg-white p-3 sm:p-4 relative group'>
+                                        <div className='flex gap-3 sm:gap-4'>
                                             {/* Product Image */}
                                             <Link 
                                                 to={`/product/${product?.productId?._id}`}
-                                                className='w-32 h-32 flex-shrink-0 bg-gray-50 rounded-xl overflow-hidden'
+                                                className='w-20 h-20 sm:w-24 sm:h-24 lg:w-32 lg:h-32 flex-shrink-0 bg-gray-50 rounded-lg sm:rounded-xl overflow-hidden'
                                             >
                                                 <img
                                                     src={product?.productId?.productImage[0]}
@@ -172,45 +172,45 @@ const Cart = () => {
                                             </Link>
 
                                             {/* Product Info */}
-                                            <div className='flex-1 flex flex-col justify-between'>
+                                            <div className='flex-1 flex flex-col justify-between min-w-0'>
                                                 <div>
                                                     <Link 
                                                         to={`/product/${product?.productId?._id}`}
                                                         className='block'
                                                     >
-                                                        <h3 className='text-lg font-semibold text-gray-900 line-clamp-2 hover:text-indigo-600 transition-colors'>
+                                                        <h3 className='text-sm sm:text-base lg:text-lg font-semibold text-gray-900 line-clamp-2 hover:text-indigo-600 transition-colors'>
                                                             {product?.productId?.productName}
                                                         </h3>
                                                     </Link>
-                                                    <p className='text-sm text-gray-500 capitalize mt-1'>
+                                                    <p className='text-xs sm:text-sm text-gray-500 capitalize mt-1'>
                                                         {product?.productId?.category}
                                                     </p>
                                                 </div>
 
-                                                <div className='flex items-center justify-between mt-4'>
+                                                <div className='flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 mt-3 sm:mt-4'>
                                                     {/* Quantity Controls */}
-                                                    <div className='flex items-center gap-3'>
+                                                    <div className='flex items-center gap-2 sm:gap-3'>
                                                         <button
-                                                            className='w-8 h-8 rounded-lg border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all'
+                                                            className='w-7 h-7 sm:w-8 sm:h-8 rounded-lg border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all'
                                                             onClick={() => decreaseQty(product?._id, product?.quantity)}
                                                         >
-                                                            <FaMinus className='text-xs' />
+                                                            <FaMinus className='text-[10px] sm:text-xs' />
                                                         </button>
-                                                        <span className='text-lg font-semibold text-gray-900 min-w-[2rem] text-center'>
+                                                        <span className='text-base sm:text-lg font-semibold text-gray-900 min-w-[1.5rem] sm:min-w-[2rem] text-center'>
                                                             {product?.quantity}
                                                         </span>
                                                         <button
-                                                            className='w-8 h-8 rounded-lg border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all'
+                                                            className='w-7 h-7 sm:w-8 sm:h-8 rounded-lg border-2 border-indigo-600 text-indigo-600 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all'
                                                             onClick={() => increaseQty(product?._id, product?.quantity)}
                                                         >
-                                                            <FaPlus className='text-xs' />
+                                                            <FaPlus className='text-[10px] sm:text-xs' />
                                                         </button>
                                                     </div>
 
                                                     {/* Price */}
-                                                    <div className='text-right'>
-                                                        <p className='text-sm text-gray-500'>Subtotal</p>
-                                                        <p className='text-xl font-bold text-indigo-600'>
+                                                    <div className='text-left sm:text-right'>
+                                                        <p className='text-xs sm:text-sm text-gray-500'>Subtotal</p>
+                                                        <p className='text-base sm:text-lg lg:text-xl font-bold text-indigo-600'>
                                                             {displayINRCurrency(product?.productId?.sellingPrice * product?.quantity)}
                                                         </p>
                                                     </div>
@@ -219,10 +219,10 @@ const Cart = () => {
 
                                             {/* Delete Button */}
                                             <button
-                                                className='absolute top-4 right-4 p-2 rounded-full text-gray-400 hover:bg-red-50 hover:text-red-600 transition-all'
+                                                className='absolute top-2 right-2 sm:top-4 sm:right-4 p-1.5 sm:p-2 rounded-full text-gray-400 hover:bg-red-50 hover:text-red-600 transition-all'
                                                 onClick={() => deleteCartProduct(product?._id)}
                                             >
-                                                <MdDelete className='text-xl' />
+                                                <MdDelete className='text-lg sm:text-xl' />
                                             </button>
                                         </div>
                                     </div>

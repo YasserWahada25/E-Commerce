@@ -89,27 +89,27 @@ const Contact = () => {
   }
 
   return (
-    <div className='min-h-screen bg-gray-50 py-12'>
-      <div className='container mx-auto px-6'>
+    <div className='min-h-screen bg-gray-50 py-8 sm:py-12 pt-20 sm:pt-24'>
+      <div className='container mx-auto px-4 sm:px-6'>
         <div className='max-w-2xl mx-auto'>
           {/* Header */}
-          <div className='text-center mb-10'>
-            <h1 className='text-4xl font-bold text-gray-900 mb-4'>Contact Us</h1>
-            <p className='text-lg text-gray-600'>
+          <div className='text-center mb-6 sm:mb-10'>
+            <h1 className='text-3xl sm:text-4xl font-bold text-gray-900 mb-3 sm:mb-4'>Contact Us</h1>
+            <p className='text-base sm:text-lg text-gray-600'>
               Have a question or feedback? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
             </p>
           </div>
 
           {/* Message de connexion requis */}
           {!isLoggedIn && (
-            <div className='bg-yellow-50 border-l-4 border-yellow-400 p-6 mb-6 rounded-lg'>
-              <div className='flex items-center'>
-                <FaLock className='text-yellow-600 text-2xl mr-3' />
+            <div className='bg-yellow-50 border-l-4 border-yellow-400 p-4 sm:p-6 mb-4 sm:mb-6 rounded-lg'>
+              <div className='flex items-start sm:items-center gap-3'>
+                <FaLock className='text-yellow-600 text-xl sm:text-2xl flex-shrink-0 mt-0.5 sm:mt-0' />
                 <div>
-                  <h3 className='text-lg font-semibold text-yellow-800 mb-1'>
+                  <h3 className='text-base sm:text-lg font-semibold text-yellow-800 mb-1'>
                     Connexion requise
                   </h3>
-                  <p className='text-yellow-700'>
+                  <p className='text-sm sm:text-base text-yellow-700'>
                     Vous devez être connecté pour nous envoyer un message.{' '}
                     <Link to="/login" className='font-bold underline hover:text-yellow-900'>
                       Se connecter maintenant
@@ -121,11 +121,11 @@ const Contact = () => {
           )}
 
           {/* Contact Form Card */}
-          <div className='bg-white rounded-2xl shadow-lg p-8'>
-            <form onSubmit={handleSubmit} className='space-y-6'>
+          <div className='bg-white rounded-xl sm:rounded-2xl shadow-lg p-6 sm:p-8'>
+            <form onSubmit={handleSubmit} className='space-y-4 sm:space-y-6'>
               {/* Name Field */}
               <div>
-                <label htmlFor='name' className='block text-sm font-semibold text-gray-700 mb-2'>
+                <label htmlFor='name' className='block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2'>
                   Nom complet {isLoggedIn && <span className='text-xs font-normal text-gray-500'>(automatiquement rempli)</span>}
                 </label>
                 <div className='relative'>
@@ -152,7 +152,7 @@ const Contact = () => {
 
               {/* Email Field */}
               <div>
-                <label htmlFor='email' className='block text-sm font-semibold text-gray-700 mb-2'>
+                <label htmlFor='email' className='block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2'>
                   Email {isLoggedIn && <span className='text-xs font-normal text-gray-500'>(automatiquement rempli)</span>}
                 </label>
                 <div className='relative'>
@@ -179,7 +179,7 @@ const Contact = () => {
 
               {/* Subject Field */}
               <div>
-                <label htmlFor='subject' className='block text-sm font-semibold text-gray-700 mb-2'>
+                <label htmlFor='subject' className='block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2'>
                   Sujet {!isLoggedIn && <span className='text-red-500'>*</span>}
                 </label>
                 <input
@@ -200,7 +200,7 @@ const Contact = () => {
 
               {/* Message Field */}
               <div>
-                <label htmlFor='message' className='block text-sm font-semibold text-gray-700 mb-2'>
+                <label htmlFor='message' className='block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2'>
                   Message {!isLoggedIn && <span className='text-red-500'>*</span>}
                 </label>
                 <textarea

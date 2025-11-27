@@ -129,27 +129,27 @@ const UploadProduct = ({
   }
 
   return (
-    <div className='fixed w-full h-full bg-slate-900 bg-opacity-50 top-0 left-0 right-0 bottom-0 flex justify-center items-center z-50 p-4'>
-       <div className='bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-xl'>
+    <div className='fixed w-full h-full bg-slate-900 bg-opacity-50 top-0 left-0 right-0 bottom-0 flex justify-center items-center z-50 p-2 sm:p-4 overflow-y-auto'>
+       <div className='bg-white rounded-xl sm:rounded-2xl w-full max-w-2xl max-h-[95vh] sm:max-h-[90vh] flex flex-col shadow-xl my-auto'>
             
             {/* Header */}
-            <div className='flex justify-between items-center p-6 border-b border-gray-200'>
+            <div className='flex justify-between items-center p-4 sm:p-6 border-b border-gray-200'>
                 <div>
-                  <h2 className='font-bold text-2xl text-gray-900'>Upload Product</h2>
-                  <p className='text-sm text-gray-500 mt-1'>Add a new product to your inventory</p>
+                  <h2 className='font-bold text-xl sm:text-2xl text-gray-900'>Upload Product</h2>
+                  <p className='text-xs sm:text-sm text-gray-500 mt-1'>Add a new product to your inventory</p>
                 </div>
                 <button 
-                  className='w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-500 hover:text-red-600 transition-all' 
+                  className='w-9 h-9 sm:w-10 sm:h-10 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-500 hover:text-red-600 transition-all flex-shrink-0' 
                   onClick={onClose}
                 >
-                    <CgClose className='text-2xl'/>
+                    <CgClose className='text-xl sm:text-2xl'/>
                 </button>
             </div>
 
           {/* Form */}
-          <form className='flex-1 overflow-y-auto p-6 space-y-4' onSubmit={handleSubmit}>
+          <form className='flex-1 overflow-y-auto p-4 sm:p-6 space-y-3 sm:space-y-4' onSubmit={handleSubmit}>
             <div>
-              <label htmlFor='productName' className='block text-sm font-semibold text-gray-700 mb-2'>Product Name</label>
+              <label htmlFor='productName' className='block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2'>Product Name</label>
               <input 
                 type='text' 
                 id='productName' 
@@ -163,7 +163,7 @@ const UploadProduct = ({
             </div>
 
             <div>
-              <label htmlFor='brandName' className='block text-sm font-semibold text-gray-700 mb-2'>Brand Name</label>
+              <label htmlFor='brandName' className='block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2'>Brand Name</label>
               <input 
                 type='text' 
                 id='brandName' 
@@ -177,7 +177,7 @@ const UploadProduct = ({
             </div>
 
             <div>
-              <label htmlFor='category' className='block text-sm font-semibold text-gray-700 mb-2'>Category</label>
+              <label htmlFor='category' className='block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2'>Category</label>
               <select 
                 required 
                 value={data.category} 
@@ -197,23 +197,23 @@ const UploadProduct = ({
             </div>
 
             <div>
-              <label htmlFor='productImage' className='block text-sm font-semibold text-gray-700 mb-2'>Product Images</label>
+              <label htmlFor='productImage' className='block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2'>Product Images</label>
               <label htmlFor='uploadImageInput'>
-                <div className='border-2 border-dashed border-gray-300 rounded-xl h-40 w-full flex justify-center items-center cursor-pointer hover:border-indigo-400 hover:bg-indigo-50 transition-all'>
-                  <div className='text-gray-500 flex justify-center items-center flex-col gap-2'>
-                    <FaCloudUploadAlt className='text-5xl text-indigo-400'/>
-                    <p className='text-sm font-medium'>Click to upload product images</p>
-                    <p className='text-xs text-gray-400'>PNG, JPG, GIF up to 5MB</p>
+                <div className='border-2 border-dashed border-gray-300 rounded-lg sm:rounded-xl h-32 sm:h-40 w-full flex justify-center items-center cursor-pointer hover:border-indigo-400 hover:bg-indigo-50 transition-all'>
+                  <div className='text-gray-500 flex justify-center items-center flex-col gap-1.5 sm:gap-2'>
+                    <FaCloudUploadAlt className='text-3xl sm:text-5xl text-indigo-400'/>
+                    <p className='text-xs sm:text-sm font-medium'>Click to upload product images</p>
+                    <p className='text-[10px] sm:text-xs text-gray-400'>PNG, JPG, GIF up to 5MB</p>
                     <input type='file' id='uploadImageInput' className='hidden' onChange={handleUploadProduct}/>
                   </div>
                 </div>
               </label> 
               
               {/* Image Previews */}
-              <div className='mt-4'>
+              <div className='mt-3 sm:mt-4'>
                   {
                     data?.productImage[0] ? (
-                        <div className='flex items-center gap-3 flex-wrap'>
+                        <div className='flex items-center gap-2 sm:gap-3 flex-wrap'>
                             {
                               data.productImage.map((el,index)=>{
                                 return(
@@ -221,7 +221,7 @@ const UploadProduct = ({
                                       <img 
                                         src={el} 
                                         alt={`Product ${index + 1}`} 
-                                        className='w-24 h-24 object-cover rounded-lg border-2 border-gray-200 cursor-pointer hover:border-indigo-400 transition-all'  
+                                        className='w-20 h-20 sm:w-24 sm:h-24 object-cover rounded-lg border-2 border-gray-200 cursor-pointer hover:border-indigo-400 transition-all'  
                                         onClick={()=>{
                                           setOpenFullScreenImage(true)
                                           setFullScreenImage(el)
@@ -229,10 +229,10 @@ const UploadProduct = ({
                                       />
                                       <button 
                                         type='button'
-                                        className='absolute -top-2 -right-2 p-1.5 text-white bg-red-500 rounded-full opacity-0 group-hover:opacity-100 transition-all hover:bg-red-600 shadow-md' 
+                                        className='absolute -top-1.5 -right-1.5 sm:-top-2 sm:-right-2 p-1 sm:p-1.5 text-white bg-red-500 rounded-full opacity-0 group-hover:opacity-100 transition-all hover:bg-red-600 shadow-md' 
                                         onClick={()=>handleDeleteProductImage(index)}
                                       >
-                                        <MdDelete className='text-sm'/>  
+                                        <MdDelete className='text-xs sm:text-sm'/>  
                                       </button>
                                   </div>
                                 )
@@ -240,15 +240,15 @@ const UploadProduct = ({
                             }
                         </div>
                     ) : (
-                      <p className='text-red-500 text-xs mt-2'>*Please upload at least one product image</p>
+                      <p className='text-red-500 text-[10px] sm:text-xs mt-2'>*Please upload at least one product image</p>
                     )
                   }
               </div>
             </div>
 
-            <div className='grid grid-cols-2 gap-4'>
+            <div className='grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4'>
               <div>
-                <label htmlFor='price' className='block text-sm font-semibold text-gray-700 mb-2'>Price</label>
+                <label htmlFor='price' className='block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2'>Price</label>
                 <input 
                   type='number' 
                   id='price' 
@@ -262,7 +262,7 @@ const UploadProduct = ({
               </div>
 
               <div>
-                <label htmlFor='sellingPrice' className='block text-sm font-semibold text-gray-700 mb-2'>Selling Price</label>
+                <label htmlFor='sellingPrice' className='block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2'>Selling Price</label>
                 <input 
                   type='number' 
                   id='sellingPrice' 
@@ -277,7 +277,7 @@ const UploadProduct = ({
             </div>
 
             <div>
-              <label htmlFor='stock' className='block text-sm font-semibold text-gray-700 mb-2'>Quantity (Stock)</label>
+              <label htmlFor='stock' className='block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2'>Quantity (Stock)</label>
               <input 
                 type='number' 
                 id='stock' 
@@ -292,11 +292,12 @@ const UploadProduct = ({
             </div>
 
             <div>
-              <label htmlFor='description' className='block text-sm font-semibold text-gray-700 mb-2'>Description</label>
+              <label htmlFor='description' className='block text-xs sm:text-sm font-semibold text-gray-700 mb-1.5 sm:mb-2'>Description</label>
               <textarea 
                 className='input-modern w-full resize-none' 
                 placeholder='Enter product description' 
-                rows={4} 
+                rows={3}
+                className='text-xs sm:text-sm' 
                 onChange={handleOnChange} 
                 name='description'
                 value={data.description}
@@ -305,8 +306,8 @@ const UploadProduct = ({
             </div>
 
             {/* Submit Button */}
-            <div className='pt-4'>
-              <button type='submit' className='btn-primary w-full py-3'>
+            <div className='pt-3 sm:pt-4'>
+              <button type='submit' className='btn-primary w-full py-2.5 sm:py-3 text-sm sm:text-base'>
                 Upload Product
               </button>
             </div>
