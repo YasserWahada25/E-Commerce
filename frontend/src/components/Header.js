@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect, useRef } from 'react'
 import Logo from './Logo'
 import { GrSearch } from "react-icons/gr";
 import { FaRegCircleUser, FaChevronDown } from "react-icons/fa6";
@@ -23,6 +23,7 @@ const Header = () => {
   const URLSearch = new URLSearchParams(searchInput?.search)
   const searchQuery = URLSearch.getAll("q")
   const [search, setSearch] = useState(searchQuery)
+  const menuRef = useRef(null)
 
   const handleLogout = async () => {
     const fetchData = await fetch(SummaryApi.logout_user.url, {
@@ -53,6 +54,23 @@ const Header = () => {
       navigate("/search")
     }
   }
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMenuDisplay(false)
+      }
+    }
+
+    if (menuDisplay) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [menuDisplay])
 
   return (
     <header className='h-20 shadow-md bg-white fixed w-full z-40'>
@@ -103,52 +121,48 @@ const Header = () => {
         {/* Right Side Icons */}
         <div className='flex items-center gap-6'>
           {/* User Menu */}
-          <div className='relative flex justify-center'>
+          <div className='relative' ref={menuRef}>
             {user?._id && (
-              <div
-                className='text-3xl cursor-pointer relative flex justify-center'
-                onClick={() => setMenuDisplay(prev => !prev)}
-              >
-                {user?.profilePic ? (
-                  <img src={user?.profilePic} className='w-10 h-10 rounded-full object-cover border-2 border-indigo-200' alt={user?.name} />
-                ) : (
-                  <FaRegCircleUser className="text-gray-600 hover:text-indigo-600 transition-colors" />
-                )}
-              </div>
-            )}
-
-            {menuDisplay && (
-              <div className='absolute bg-white bottom-0 top-14 right-0 shadow-xl rounded-lg overflow-hidden min-w-[180px] slide-down'>
-                <nav className='p-2'>
-                  {user?.role === ROLE.ADMIN && (
-                    <Link
-                      to={"/admin-panel/all-products"}
-                      className='block px-4 py-2.5 hover:bg-indigo-50 rounded-lg transition-colors text-gray-700 hover:text-indigo-600 font-medium'
-                      onClick={() => setMenuDisplay(false)}
-                    >
-                      Admin Panel
-                    </Link>
-                  )}
-
-                  {user?.role === ROLE.ADMIN ? (
-                    <Link
-                      to={"/admin/profile"}
-                      className='block px-4 py-2.5 hover:bg-indigo-50 rounded-lg transition-colors text-gray-700 hover:text-indigo-600 font-medium'
-                      onClick={() => setMenuDisplay(false)}
-                    >
-                      Profile
-                    </Link>
+              <>
+                <div
+                  className='text-3xl cursor-pointer relative flex justify-center'
+                  onClick={() => setMenuDisplay(prev => !prev)}
+                >
+                  {user?.profilePic ? (
+                    <img 
+                      src={user?.profilePic} 
+                      className='w-10 h-10 rounded-full object-cover border-2 border-indigo-200 hover:border-indigo-400 transition-all' 
+                      alt={user?.name} 
+                    />
                   ) : (
-                    <Link
-                      to={"/profile"}
-                      className='block px-4 py-2.5 hover:bg-indigo-50 rounded-lg transition-colors text-gray-700 hover:text-indigo-600 font-medium'
-                      onClick={() => setMenuDisplay(false)}
-                    >
-                      Profile
-                    </Link>
+                    <FaRegCircleUser className="text-gray-600 hover:text-indigo-600 transition-colors" />
                   )}
-                </nav>
-              </div>
+                </div>
+
+                {menuDisplay && (
+                  <div className='absolute top-12 right-0 bg-white shadow-xl rounded-lg overflow-hidden min-w-[180px] z-50 slide-down border border-gray-100'>
+                    <nav className='p-2'>
+                      {user?.role === ROLE.ADMIN && (
+                        <Link
+                          to={"/admin-panel/all-products"}
+                          className='block px-4 py-2.5 hover:bg-indigo-50 rounded-lg transition-colors text-gray-700 hover:text-indigo-600 font-medium'
+                          onClick={() => setMenuDisplay(false)}
+                        >
+                          Admin Panel
+                        </Link>
+                      )}
+                      
+                      <Link
+                        to={"/profile"}
+                        className='block px-4 py-2.5 hover:bg-indigo-50 rounded-lg transition-colors text-gray-700 hover:text-indigo-600 font-medium'
+                        onClick={() => setMenuDisplay(false)}
+                      >
+                        Profile
+                      </Link>
+                    </nav>
+                  </div>
+                )}
+              </>
             )}
           </div>
 
