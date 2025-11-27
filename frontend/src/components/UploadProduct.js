@@ -127,44 +127,62 @@ const UploadProduct = ({
   }
 
   return (
-    <div className='fixed w-full  h-full bg-slate-200 bg-opacity-35 top-0 left-0 right-0 bottom-0 flex justify-center items-center'>
-       <div className='bg-white p-4 rounded w-full max-w-2xl h-full max-h-[80%] overflow-hidden'>
-
-            <div className='flex justify-between items-center pb-3'>
-                <h2 className='font-bold text-lg'>Upload Product</h2>
-                <div className='w-fit ml-auto text-2xl hover:text-red-600 cursor-pointer' onClick={onClose}>
-                    <CgClose/>
+    <div className='fixed w-full h-full bg-slate-900 bg-opacity-50 top-0 left-0 right-0 bottom-0 flex justify-center items-center z-50 p-4'>
+       <div className='bg-white rounded-2xl w-full max-w-2xl max-h-[90vh] flex flex-col shadow-xl'>
+            
+            {/* Header */}
+            <div className='flex justify-between items-center p-6 border-b border-gray-200'>
+                <div>
+                  <h2 className='font-bold text-2xl text-gray-900'>Upload Product</h2>
+                  <p className='text-sm text-gray-500 mt-1'>Add a new product to your inventory</p>
                 </div>
+                <button 
+                  className='w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center text-gray-500 hover:text-red-600 transition-all' 
+                  onClick={onClose}
+                >
+                    <CgClose className='text-2xl'/>
+                </button>
             </div>
 
-          <form className='grid p-4 gap-2 overflow-y-scroll h-full pb-5' onSubmit={handleSubmit}>
-            <label htmlFor='productName'>Product Name :</label>
-            <input 
-              type='text' 
-              id='productName' 
-              placeholder='enter product name' 
-              name='productName'
-              value={data.productName} 
-              onChange={handleOnChange}
-              className='p-2 bg-slate-100 border rounded'
-              required
-            />
+          {/* Form */}
+          <form className='flex-1 overflow-y-auto p-6 space-y-4' onSubmit={handleSubmit}>
+            <div>
+              <label htmlFor='productName' className='block text-sm font-semibold text-gray-700 mb-2'>Product Name</label>
+              <input 
+                type='text' 
+                id='productName' 
+                placeholder='Enter product name' 
+                name='productName'
+                value={data.productName} 
+                onChange={handleOnChange}
+                className='input-modern w-full'
+                required
+              />
+            </div>
 
+            <div>
+              <label htmlFor='brandName' className='block text-sm font-semibold text-gray-700 mb-2'>Brand Name</label>
+              <input 
+                type='text' 
+                id='brandName' 
+                placeholder='Enter brand name' 
+                value={data.brandName} 
+                name='brandName'
+                onChange={handleOnChange}
+                className='input-modern w-full'
+                required
+              />
+            </div>
 
-            <label htmlFor='brandName' className='mt-3'>Brand Name :</label>
-            <input 
-              type='text' 
-              id='brandName' 
-              placeholder='enter brand name' 
-              value={data.brandName} 
-              name='brandName'
-              onChange={handleOnChange}
-              className='p-2 bg-slate-100 border rounded'
-              required
-            />
-
-              <label htmlFor='category' className='mt-3'>Category :</label>
-              <select required value={data.category} name='category' onChange={handleOnChange} className='p-2 bg-slate-100 border rounded'>
+            <div>
+              <label htmlFor='category' className='block text-sm font-semibold text-gray-700 mb-2'>Category</label>
+              <select 
+                required 
+                value={data.category} 
+                name='category' 
+                onChange={handleOnChange} 
+                className='input-modern w-full'
+              >
                   <option value={""}>Select Category</option>
                   {
                     productCategory.map((el,index)=>{
@@ -174,109 +192,116 @@ const UploadProduct = ({
                     })
                   }
               </select>
+            </div>
 
-              <label htmlFor='productImage' className='mt-3'>Product Image :</label>
+            <div>
+              <label htmlFor='productImage' className='block text-sm font-semibold text-gray-700 mb-2'>Product Images</label>
               <label htmlFor='uploadImageInput'>
-              <div className='p-2 bg-slate-100 border rounded h-32 w-full flex justify-center items-center cursor-pointer'>
-                        <div className='text-slate-500 flex justify-center items-center flex-col gap-2'>
-                          <span className='text-4xl'><FaCloudUploadAlt/></span>
-                          <p className='text-sm'>Upload Product Image</p>
-                          <input type='file' id='uploadImageInput'  className='hidden' onChange={handleUploadProduct}/>
-                        </div>
-              </div>
+                <div className='border-2 border-dashed border-gray-300 rounded-xl h-40 w-full flex justify-center items-center cursor-pointer hover:border-indigo-400 hover:bg-indigo-50 transition-all'>
+                  <div className='text-gray-500 flex justify-center items-center flex-col gap-2'>
+                    <FaCloudUploadAlt className='text-5xl text-indigo-400'/>
+                    <p className='text-sm font-medium'>Click to upload product images</p>
+                    <p className='text-xs text-gray-400'>PNG, JPG, GIF up to 5MB</p>
+                    <input type='file' id='uploadImageInput' className='hidden' onChange={handleUploadProduct}/>
+                  </div>
+                </div>
               </label> 
-              <div>
+              
+              {/* Image Previews */}
+              <div className='mt-4'>
                   {
                     data?.productImage[0] ? (
-                        <div className='flex items-center gap-2'>
+                        <div className='flex items-center gap-3 flex-wrap'>
                             {
                               data.productImage.map((el,index)=>{
                                 return(
-                                  <div className='relative group'>
+                                  <div key={index} className='relative group'>
                                       <img 
                                         src={el} 
-                                        alt={el} 
-                                        width={80} 
-                                        height={80}  
-                                        className='bg-slate-100 border cursor-pointer'  
+                                        alt={`Product ${index + 1}`} 
+                                        className='w-24 h-24 object-cover rounded-lg border-2 border-gray-200 cursor-pointer hover:border-indigo-400 transition-all'  
                                         onClick={()=>{
                                           setOpenFullScreenImage(true)
                                           setFullScreenImage(el)
-                                        }}/>
-
-                                        <div className='absolute bottom-0 right-0 p-1 text-white bg-red-600 rounded-full hidden group-hover:block cursor-pointer' onClick={()=>handleDeleteProductImage(index)}>
-                                          <MdDelete/>  
-                                        </div>
+                                        }}
+                                      />
+                                      <button 
+                                        type='button'
+                                        className='absolute -top-2 -right-2 p-1.5 text-white bg-red-500 rounded-full opacity-0 group-hover:opacity-100 transition-all hover:bg-red-600 shadow-md' 
+                                        onClick={()=>handleDeleteProductImage(index)}
+                                      >
+                                        <MdDelete className='text-sm'/>  
+                                      </button>
                                   </div>
-                                  
                                 )
                               })
                             }
                         </div>
                     ) : (
-                      <p className='text-red-600 text-xs'>*Please upload product image</p>
+                      <p className='text-red-500 text-xs mt-2'>*Please upload at least one product image</p>
                     )
                   }
-                  
+              </div>
+            </div>
+
+            <div className='grid grid-cols-2 gap-4'>
+              <div>
+                <label htmlFor='price' className='block text-sm font-semibold text-gray-700 mb-2'>Price</label>
+                <input 
+                  type='number' 
+                  id='price' 
+                  placeholder='Enter price' 
+                  value={data.price} 
+                  name='price'
+                  onChange={handleOnChange}
+                  className='input-modern w-full'
+                  required
+                />
               </div>
 
-              <label htmlFor='price' className='mt-3'>Price :</label>
-              <input 
-                type='number' 
-                id='price' 
-                placeholder='enter price' 
-                value={data.price} 
-                name='price'
-                onChange={handleOnChange}
-                className='p-2 bg-slate-100 border rounded'
-                required
-              />
+              <div>
+                <label htmlFor='sellingPrice' className='block text-sm font-semibold text-gray-700 mb-2'>Selling Price</label>
+                <input 
+                  type='number' 
+                  id='sellingPrice' 
+                  placeholder='Enter selling price' 
+                  value={data.sellingPrice} 
+                  name='sellingPrice'
+                  onChange={handleOnChange}
+                  className='input-modern w-full'
+                  required
+                />
+              </div>
+            </div>
 
-
-              <label htmlFor='sellingPrice' className='mt-3'>Selling Price :</label>
-              <input 
-                type='number' 
-                id='sellingPrice' 
-                placeholder='enter selling price' 
-                value={data.sellingPrice} 
-                name='sellingPrice'
-                onChange={handleOnChange}
-                className='p-2 bg-slate-100 border rounded'
-                required
-              />
-
-              <label htmlFor='description' className='mt-3'>Description :</label>
+            <div>
+              <label htmlFor='description' className='block text-sm font-semibold text-gray-700 mb-2'>Description</label>
               <textarea 
-                className='h-28 bg-slate-100 border resize-none p-1' 
-                placeholder='enter product description' 
-                rows={3} 
+                className='input-modern w-full resize-none' 
+                placeholder='Enter product description' 
+                rows={4} 
                 onChange={handleOnChange} 
                 name='description'
                 value={data.description}
               >
               </textarea>
+            </div>
 
-
-
-
-
-              <button className='px-3 py-2 bg-red-600 text-white mb-10 hover:bg-red-700'>Upload Product</button>
-          </form> 
-
-
-
-      
+            {/* Submit Button */}
+            <div className='pt-4'>
+              <button type='submit' className='btn-primary w-full py-3'>
+                Upload Product
+              </button>
+            </div>
+          </form>
        </div>
 
-
-
-       {/***display image full screen */}
+       {/* Display Image Full Screen */}
        {
         openFullScreenImage && (
           <DisplayImage onClose={()=>setOpenFullScreenImage(false)} imgUrl={fullScreenImage}/>
         )
        }
-        
 
     </div>
   )

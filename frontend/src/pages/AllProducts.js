@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import UploadProduct from '../components/UploadProduct'
 import SummaryApi from '../common'
-import AdminProductCard from '../components/AdminProductCard'
+import AdminModernProductCard from '../components/AdminModernProductCard'
 
 const AllProducts = () => {
   const [openUploadProduct,setOpenUploadProduct] = useState(false)
@@ -21,36 +21,42 @@ const AllProducts = () => {
   },[])
   
   return (
-    <div>
-        <div className='bg-white py-2 px-4 flex justify-between items-center'>
-            <h2 className='font-bold text-lg'>All Product</h2>
-            <button  className='border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white transition-all py-1 px-3 rounded-full ' onClick={()=>setOpenUploadProduct(true)}>Upload Product</button>
+    <div className='min-h-full'>
+        {/* Header */}
+        <div className='bg-white rounded-xl shadow-sm p-6 mb-6 flex justify-between items-center'>
+            <div>
+              <h2 className='font-bold text-2xl text-gray-900'>All Products</h2>
+              <p className='text-sm text-gray-500 mt-1'>Manage your product inventory</p>
+            </div>
+            <button 
+              className='btn-primary' 
+              onClick={()=>setOpenUploadProduct(true)}
+            >
+              Upload Product
+            </button>
         </div>
 
-        {/**all product */}
-        <div className='flex items-center flex-wrap gap-5 py-4 h-[calc(100vh-190px)] overflow-y-scroll'>
+        {/* Product Grid */}
+        <div className='product-grid'>
           {
             allProduct.map((product,index)=>{
               return(
-                <AdminProductCard data={product} key={index+"allProduct"} fetchdata={fetchAllProduct}/>
-                
+                <AdminModernProductCard 
+                  product={product} 
+                  key={index+"allProduct"} 
+                  fetchData={fetchAllProduct}
+                />
               )
             })
           }
         </div>
 
-
-
-
-
-        {/**upload prouct component */}
+        {/* Upload Product Modal */}
         {
           openUploadProduct && (
             <UploadProduct onClose={()=>setOpenUploadProduct(false)} fetchData={fetchAllProduct}/>
           )
         }
-      
-
     </div>
   )
 }

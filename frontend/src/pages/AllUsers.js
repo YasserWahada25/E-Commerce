@@ -15,7 +15,7 @@ const AllUsers = () => {
         _id  : ""
     })
 
-    const fetchAllUsers = async() =>{
+    const fetchAllUsers = async() => {
         const fetchData = await fetch(SummaryApi.allUser.url,{
             method : SummaryApi.allUser.method,
             credentials : 'include'
@@ -38,46 +38,71 @@ const AllUsers = () => {
     },[])
 
   return (
-    <div className='bg-white pb-4'>
-        <table className='w-full userTable'>
-            <thead>
-                <tr className='bg-black text-white'>
-                    <th>Sr.</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Role</th>
-                    <th>Created Date</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody className=''>
-                {
-                    allUser.map((el,index) => {
-                        return(
-                            <tr>
-                                <td>{index+1}</td>
-                                <td>{el?.name}</td>
-                                <td>{el?.email}</td>
-                                <td>{el?.role}</td>
-                                <td>{moment(el?.createdAt).format('LL')}</td>
-                                <td>
-                                    <button className='bg-green-100 p-2 rounded-full cursor-pointer hover:bg-green-500 hover:text-white' 
-                                    onClick={()=>{
-                                        setUpdateUserDetails(el)
-                                        setOpenUpdateRole(true)
+    <div className='min-h-full'>
+        {/* Header */}
+        <div className='bg-white rounded-xl shadow-sm p-6 mb-6'>
+            <div>
+              <h2 className='font-bold text-2xl text-gray-900'>All Users</h2>
+              <p className='text-sm text-gray-500 mt-1'>Manage user accounts and roles</p>
+            </div>
+        </div>
 
-                                    }}
+        {/* Table Container */}
+        <div className='bg-white rounded-xl shadow-sm overflow-hidden'>
+            <div className='overflow-x-auto'>
+                <table className='w-full'>
+                    <thead>
+                        <tr className='bg-gradient-to-r from-indigo-600 to-purple-600 text-white'>
+                            <th className='py-4 px-6 text-left text-sm font-semibold'>Sr.</th>
+                            <th className='py-4 px-6 text-left text-sm font-semibold'>Name</th>
+                            <th className='py-4 px-6 text-left text-sm font-semibold'>Email</th>
+                            <th className='py-4 px-6 text-left text-sm font-semibold'>Role</th>
+                            <th className='py-4 px-6 text-left text-sm font-semibold'>Created Date</th>
+                            <th className='py-4 px-6 text-left text-sm font-semibold'>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            allUser.map((el,index) => {
+                                return(
+                                    <tr 
+                                        key={el._id} 
+                                        className='border-b border-gray-100 hover:bg-indigo-50 transition-colors'
                                     >
-                                        <MdModeEdit/>
-                                    </button>
-                                </td>
-                            </tr>
-                        )
-                    })
-                }
-            </tbody>
-        </table>
+                                        <td className='py-4 px-6 text-sm text-gray-700'>{index+1}</td>
+                                        <td className='py-4 px-6'>
+                                            <span className='font-medium text-gray-900'>{el?.name}</span>
+                                        </td>
+                                        <td className='py-4 px-6 text-sm text-gray-600'>{el?.email}</td>
+                                        <td className='py-4 px-6'>
+                                            <span className={`badge ${el?.role === 'ADMIN' ? 'badge-primary' : 'badge-success'}`}>
+                                                {el?.role}
+                                            </span>
+                                        </td>
+                                        <td className='py-4 px-6 text-sm text-gray-600'>
+                                            {moment(el?.createdAt).format('LL')}
+                                        </td>
+                                        <td className='py-4 px-6'>
+                                            <button 
+                                                className='p-2 rounded-full bg-indigo-100 text-indigo-600 hover:bg-indigo-600 hover:text-white transition-all shadow-sm hover:shadow-md' 
+                                                onClick={()=>{
+                                                    setUpdateUserDetails(el)
+                                                    setOpenUpdateRole(true)
+                                                }}
+                                            >
+                                                <MdModeEdit className='text-lg'/>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                )
+                            })
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
+        {/* Change User Role Modal */}
         {
             openUpdateRole && (
                 <ChangeUserRole 
