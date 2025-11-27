@@ -290,7 +290,7 @@ const ProductDetails = () => {
                   <div>
                     <h4 className='font-semibold text-gray-900'>Free Delivery</h4>
                     <p className='text-sm text-gray-600 mt-1'>
-                      Free standard shipping on orders over ₹500
+                      Free standard shipping on orders over 500 DT
                     </p>
                   </div>
                 </div>

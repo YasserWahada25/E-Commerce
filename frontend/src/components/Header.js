@@ -104,16 +104,16 @@ const Header = () => {
 
         {/* Search Bar */}
         <div className='hidden lg:flex items-center flex-1 max-w-md mx-8'>
-          <div className='w-full flex items-center bg-gray-100 rounded-full overflow-hidden border border-gray-200 focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-100 transition-all'>
+          <div className='w-full flex items-center bg-gray-100 rounded-full overflow-hidden border border-gray-200 focus-within:border-indigo-500 focus-within:ring-2 focus-within:ring-indigo-100 transition-all px-4'>
             <input
               type='text'
               placeholder='Search products...'
-              className='w-full px-4 py-2.5 bg-transparent outline-none text-sm'
+              className='w-full py-2.5 bg-transparent outline-none text-sm'
               onChange={handleSearch}
               value={search}
             />
-            <button className='px-4 py-2.5 bg-indigo-600 text-white hover:bg-indigo-700 transition-colors'>
-              <GrSearch className="text-white" />
+            <button className='text-gray-500 hover:text-indigo-600 transition-colors'>
+              <GrSearch className="text-xl" />
             </button>
           </div>
         </div>
