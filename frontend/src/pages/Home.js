@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { FaChevronDown } from 'react-icons/fa'
 import ModernProductCard from '../components/ModernProductCard'
 import SummaryApi from '../common'
 
@@ -36,6 +35,35 @@ const Home = () => {
   useEffect(() => {
     fetchProducts()
   }, [])
+
+  // Apply sorting when sortBy changes
+  useEffect(() => {
+    if (products.length === 0) return
+
+    let sortedProducts = [...products]
+
+    switch (sortBy) {
+      case 'price-low':
+        sortedProducts.sort((a, b) => a.sellingPrice - b.sellingPrice)
+        break
+      case 'price-high':
+        sortedProducts.sort((a, b) => b.sellingPrice - a.sellingPrice)
+        break
+      case 'rating':
+        sortedProducts.sort((a, b) => (b.rating || 0) - (a.rating || 0))
+        break
+      case 'newest':
+        sortedProducts.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+        break
+      case 'featured':
+      default:
+        // Keep original order
+        break
+    }
+
+    setProducts(sortedProducts)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [sortBy])
 
   return (
     <div className='min-h-screen bg-gray-50'>
